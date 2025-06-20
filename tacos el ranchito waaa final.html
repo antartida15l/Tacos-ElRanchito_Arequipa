@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Ranchito - Tacos Mexicanos y Súper Sandwiches</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rojo-pastel: #B90E0A;
+            --verde-pastel: #028A0F;
+            --blanco: #FFFFFF;
+            --rojo-oscuro: #A91B0D;
+            --verde-oscuro: #32612D;
+            --gris-claro: #F8F9FA;
+            --amarillo: #FFD43B;
+            --naranja: #FF922B;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, var(--blanco) 0%, #F8F8F8 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--rojo-pastel) 0%, var(--rojo-oscuro) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: var(--blanco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--rojo-oscuro);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .logo-text h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .logo-text p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--verde-pastel) 0%, var(--verde-oscuro) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--rojo-pastel);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            background: var(--rojo-oscuro);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 4rem 0;
+            background: var(--gris-claro);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--rojo-oscuro);
+        }
+
+        .menu-categories {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .menu-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            color: var(--verde-oscuro);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid var(--verde-pastel);
+            padding-bottom: 10px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .menu-item {
+            border: 2px solid var(--verde-pastel);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .menu-item:hover::before {
+            opacity: 1;
+            animation: shine 0.8s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .menu-item:hover {
+            border-color: var(--rojo-pastel);
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--verde-oscuro);
+            margin-bottom: 0.5rem;
+        }
+
+        .item-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .item-price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--rojo-oscuro);
+            background: linear-gradient(135deg, var(--amarillo), var(--naranja));
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: var(--verde-pastel);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: var(--verde-oscuro);
+            transform: translateY(-2px);
+        }
+
+        /* Cart */
+        .cart-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--rojo-pastel);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .cart-button:hover {
+            background: var(--rojo-oscuro);
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--verde-oscuro);
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: var(--rojo-oscuro);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            background: var(--verde-pastel);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .quantity-btn:hover {
+            background: var(--verde-oscuro);
+        }
+
+        .checkout-form {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--gris-claro);
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--verde-oscuro);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--verde-pastel);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--rojo-pastel);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--rojo-pastel);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: var(--rojo-oscuro);
+        }
+
+        /* Promotions */
+        .promotions {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--blanco) 0%, var(--gris-claro) 100%);
+        }
+
+        .promo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .promo-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 3px solid var(--verde-pastel);
+            transition: all 0.3s ease;
+        }
+
+        .promo-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--rojo-pastel);
+        }
+
+        .promo-title {
+            font-size: 1.5rem;
+            color: var(--rojo-oscuro);
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 0;
+            background: var(--verde-pastel);
+            color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .chef-info {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 4rem 0;
+            background: var(--gris-claro);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--rojo-pastel);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--rojo-oscuro);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">🌮</div>
+                    <div class="logo-text">
+                        <h1>EL RANCHITO</h1>
+                        <p>Tacos Mexicanos y Súper Sandwiches</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#menu">Menú</a></li>
+                        <li><a href="#promotions">Promociones</a></li>
+                        <li><a href="#about">Nosotros</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>¡Sabor Auténtico Mexicano en Arequipa!</h2>
+            <p>Más de 20 años sirviendo los mejores tacos y súper sandwiches con sazón peruana</p>
+            <a href="#menu" class="cta-button">Ver Menú</a>
+        </div>
+    </section>
+
+    <section id="menu" class="menu">
+        <div class="container">
+            <h2 class="section-title">Nuestro Menú</h2>
+            <div class="menu-categories">
+                
+                <!-- Tacos -->
+                <div class="menu-category">
+                    <h3 class="category-title">🌮 TACOS</h3>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">🐔</span>
+                                    <div class="item-name">Taco de Pollo</div>
+                                    <div class="item-description">Jugoso pollo marinado con especias mexicanas, cilantro fresco, cebolla morada y salsa verde picante.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Taco de Pollo', 10.00)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">🐄</span>
+                                    <div class="item-name">Taco de Res</div>
+                                    <div class="item-description">Tierna carne de res sazonada con comino y ají panca, acompañada de guacamole y pico de gallo.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Taco de Res', 10.00)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">🌶️</span>
+                                    <div class="item-name">Taco de Chorizo</div>
+                                    <div class="item-description">Chorizo arequipeño con un toque mexicano, cebolla caramelizada y salsa criolla picante.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Taco de Chorizo', 10.00)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">🐷</span>
+                                    <div class="item-name">Taco de Lechón</div>
+                                    <div class="item-description">Lechón crujiente estilo peruano con salsa de ají amarillo y cilantro, fusión única de sabores.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Taco de Lechón', 10.00)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">🔥</span>
+                                    <div class="item-name">Taco Combinado (Res + Chorizo)</div>
+                                    <div class="item-description">La perfecta combinación de carne de res y chorizo con doble sabor y intensidad.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Taco Combinado (Res + Chorizo)', 10.00)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">⭐</span>
+                                    <div class="item-name">Taco Mixto (Res + Chorizo + Pollo)</div>
+                                    <div class="item-description">¡Nuestra especialidad! Triple proteína con los mejores sabores de El Ranchito en un solo taco.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Taco Mixto (Res + Chorizo + Pollo)', 10.00)">Agregar al Carrito</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Súper Sandwiches -->
+                <div class="menu-category">
+                    <h3 class="category-title">🥪 SÚPER SANDWICHES</h3>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">🍗</span>
+                                    <div class="item-name">Súper Sandwich de Pollo</div>
+                                    <div class="item-description">Pan artesanal con pollo a la plancha, lechuga, tomate, palta y salsa golf casera.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Súper Sandwich de Pollo', 10.00)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">🥩</span>
+                                    <div class="item-name">Súper Sandwich de Res</div>
+                                    <div class="item-description">Jugosa carne de res, cebolla grillada, queso derretido y nuestra salsa secreta de ají.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Súper Sandwich de Res', 10.00)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">🌭</span>
+                                    <div class="item-name">Súper Sandwich de Chorizo</div>
+                                    <div class="item-description">Chorizo arequipeño premium, cebolla morada, tomate y mayonesa de ajo.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Súper Sandwich de Chorizo', 10.00)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">🥓</span>
+                                    <div class="item-name">Súper Sandwich de Lechón</div>
+                                    <div class="item-description">Lechón crujiente, camote frito, sarza criolla y salsa huancaína.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Súper Sandwich de Lechón', 10.00)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">💪</span>
+                                    <div class="item-name">Súper Sandwich Combinado (Res + Chorizo)</div>
+                                    <div class="item-description">Doble proteína con vegetales frescos y salsas especiales de la casa.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Súper Sandwich Combinado (Res + Chorizo)', 10.00)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">👑</span>
+                                    <div class="item-name">Súper Sandwich Mixto (Res + Chorizo + Pollo)</div>
+                                    <div class="item-description">¡El Rey de los sandwiches! Triple carne con todos los ingredientes premium.</div>
+                                </div>
+                                <span class="item-price">S/ 10.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Súper Sandwich Mixto (Res + Chorizo + Pollo)', 10.00)">Agregar al Carrito</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bebidas -->
+                <div class="menu-category">
+                    <h3 class="category-title">🥤 BEBIDAS</h3>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">🥤</span>
+                                    <div class="item-name">Gaseosa Personal</div>
+                                    <div class="item-description">Coca-Cola, Fanta, Sprite, Inca Kola - 300ml bien fría</div>
+                                </div>
+                                <span class="item-price">S/ 2.50</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Gaseosa Personal', 2.50)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">🍾</span>
+                                    <div class="item-name">Gaseosa Medio Litro</div>
+                                    <div class="item-description">Coca-Cola, Fanta, Sprite, Inca Kola - 500ml para compartir</div>
+                                </div>
+                                <span class="item-price">S/ 3.50</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Gaseosa Medio Litro', 3.50)">Agregar al Carrito</button>
+                        </div>
+                        <div class="menu-item">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <span class="item-icon">💧</span>
+                                    <div class="item-name">Agua</div>
+                                    <div class="item-description">Agua mineral natural sin gas - 500ml</div>
+                                </div>
+                                <span class="item-price">S/ 2.50</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('Agua', 2.50)">Agregar al Carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="promotions" class="promotions">
+        <div class="container">
+            <h2 class="section-title">Promociones Especiales</h2>
+            <div class="promo-grid">
+                <div class="promo-card">
+                    <h3 class="promo-title">🌟 Combo Ranchero</h3>
+                    <p>1 Taco + 1 Súper Sandwich + 1 Gaseosa Personal</p>
+                    <h4 style="color: var(--rojo-oscuro); font-size: 1.8rem;">S/ 20.00</h4>
+                    <small style="text-decoration: line-through; color: #666;">Precio normal: S/ 22.50</small>
+                </div>
+                <div class="promo-card">
+                    <h3 class="promo-title">👨‍👩‍👧‍👦 Combo Familiar</h3>
+                    <p>4 Tacos Mixtos + 4 Gaseosas + 2 Aguas</p>
+                    <h4 style="color: var(--rojo-oscuro); font-size: 1.8rem;">S/ 42.00</h4>
+                    <small style="text-decoration: line-through; color: #666;">Precio normal: S/ 45.00</small>
+                </div>
+                <div class="promo-card">
+                    <h3 class="promo-title">🎉 Martes de Descuento</h3>
+                    <p>20% de descuento en todos los súper sandwiches</p>
+                    <h4 style="color: var(--rojo-oscuro); font-size: 1.8rem;">Solo S/ 8.00</h4>
+                    <small>*Válido solo los martes</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Sobre Nosotros</h2>
+            <div class="about-content">
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Nuestra Historia</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        Tacos Mexicanos y Súper Sándwiches "El Ranchito" es una microempresa familiar con más de 20 años de trayectoria, 
+                        ubicada en una acogedora casita rústica en Yanahuara, muy cerca del Parque Libertad de Expresión. 
+                        Nos dedicamos a la venta de comida rápida con alma mexicana y sazón peruana, ofreciendo una experiencia 
+                        gastronómica única que fusiona sabores tradicionales de México con ingredientes y toques propios del Perú.
+                    </p>
+                </div>
+                <div class="chef-info">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">👨‍🍳 Nuestro Chef</h3>
+                    <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Luis Condori</h4>
+                    <p>
+                        Con más de dos décadas de experiencia, el Chef Luis Condori ha perfeccionado el arte de fusionar 
+                        los sabores mexicanos con la tradición culinaria peruana, creando recetas únicas que han conquistado 
+                        el paladar arequipeño.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contáctanos</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3>Ubicación</h3>
+                    <p>Calle Lazo de los Ríos<br>Distrito de Yanahuara<br>Arequipa, Perú</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">🕐</div>
+                    <h3>Horarios</h3>
+                    <p>Lunes a Domingo<br>4:00 PM - 12:30 AM</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3>Teléfono</h3>
+                    <p>+51 954 123 456</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h3>Email</h3>
+                    <p>contacto@elranchito.pe</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 El Ranchito - Tacos Mexicanos y Súper Sandwiches. Todos los derechos reservados.</p>
+            <p>🌮 Síguenos en nuestras redes sociales para promociones especiales 🥪</p>
+        </div>
+    </footer>
+
+    <!-- Cart Button -->
+    <button class="cart-button" onclick="openCart()">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2 style="color: var(--rojo-oscuro); margin-bottom: 1rem;">🛒 Tu Pedido</h2>
+            <div id="cartItems"></div>
+            <div style="text-align: right; margin: 1rem 0; font-size: 1.2rem; font-weight: bold; color: var(--verde-oscuro);">
+                Total: S/ <span id="cartTotal">0.00</span>
+            </div>
+            
+            <div class="checkout-form" id="checkoutForm" style="display: none;">
+                <h3 style="color: var(--rojo-oscuro); margin-bottom: 1rem;">Datos del Pedido</h3>
+                <div class="form-group">
+                    <label for="customerName">Nombre Completo *</label>
+                    <input type="text" id="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerPhone">Número de Contacto *</label>
+                    <input type="tel" id="customerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerEmail">Email</label>
+                    <input type="email" id="customerEmail">
+                </div>
+                <div class="form-group">
+                    <label for="deliveryType">Tipo de Entrega *</label>
+                    <select id="deliveryType" required onchange="toggleAddressField()">
+                        <option value="">Selecciona una opción</option>
+                        <option value="pickup">Recojo en Local</option>
+                        <option value="delivery">Delivery</option>
+                    </select>
+                </div>
+                <div class="form-group" id="addressGroup" style="display: none;">
+                    <label for="customerAddress">Dirección de Entrega *</label>
+                    <input type="text" id="customerAddress" placeholder="Ingresa tu dirección completa">
+                </div>
+                <div class="form-group">
+                    <label for="orderNotes">Observaciones</label>
+                    <input type="text" id="orderNotes" placeholder="Instrucciones especiales (opcional)">
+                </div>
+                <button class="checkout-btn" onclick="processOrder()">Confirmar Pedido</button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 1rem;">
+                <button class="checkout-btn" id="proceedCheckout" onclick="showCheckoutForm()" style="display: none;">
+                    Proceder al Pedido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeOrderModal()">&times;</span>
+            <div id="orderConfirmation"></div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let cartCount = 0;
+        let cartTotal = 0;
+
+        function addToCart(itemName, price) {
+            const existingItem = cart.find(item => item.name === itemName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: itemName,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            
+            // Visual feedback
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '¡Agregado!';
+            button.style.background = 'var(--verde-oscuro)';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'var(--verde-pastel)';
+            }, 1000);
+        }
+
+        function updateCartDisplay() {
+            cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            
+            document.getElementById('cartCount').textContent = cartCount;
+            document.getElementById('cartTotal').textContent = cartTotal.toFixed(2);
+            
+            const cartItemsContainer = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">Tu carrito está vacío</p>';
+                document.getElementById('proceedCheckout').style.display = 'none';
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            <span style="color: var(--rojo-oscuro);">S/ ${item.price.toFixed(2)} c/u</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', -1)">-</button>
+                            <span style="margin: 0 10px; font-weight: bold;">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', 1)">+</button>
+                            <button class="quantity-btn" onclick="removeFromCart('${item.name}')" style="background: var(--rojo-pastel); margin-left: 10px;">🗑️</button>
+                        </div>
+                    </div>
+                `).join('');
+                document.getElementById('proceedCheckout').style.display = 'block';
+            }
+        }
+
+        function changeQuantity(itemName, change) {
+            const item = cart.find(item => item.name === itemName);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemName);
+                } else {
+                    updateCartDisplay();
+                }
+            }
+        }
+
+        function removeFromCart(itemName) {
+            cart = cart.filter(item => item.name !== itemName);
+            updateCartDisplay();
+        }
+
+        function openCart() {
+            document.getElementById('cartModal').style.display = 'block';
+            updateCartDisplay();
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+            document.getElementById('checkoutForm').style.display = 'none';
+        }
+
+        function showCheckoutForm() {
+            document.getElementById('checkoutForm').style.display = 'block';
+        }
+
+        function toggleAddressField() {
+            const deliveryType = document.getElementById('deliveryType').value;
+            const addressGroup = document.getElementById('addressGroup');
+            
+            if (deliveryType === 'delivery') {
+                addressGroup.style.display = 'block';
+                document.getElementById('customerAddress').required = true;
+            } else {
+                addressGroup.style.display = 'none';
+                document.getElementById('customerAddress').required = false;
+            }
+        }
+
+        function processOrder() {
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const email = document.getElementById('customerEmail').value;
+            const deliveryType = document.getElementById('deliveryType').value;
+            const address = document.getElementById('customerAddress').value;
+            const notes = document.getElementById('orderNotes').value;
+
+            if (!name || !phone || !deliveryType) {
+                alert('Por favor completa todos los campos obligatorios.');
+                return;
+            }
+
+            if (deliveryType === 'delivery' && !address) {
+                alert('Por favor ingresa la dirección de entrega.');
+                return;
+            }
+
+            // Generate order number
+            const orderNumber = 'ER' + Date.now().toString().slice(-6);
+            const currentDate = new Date().toLocaleString('es-PE');
+
+            const orderSummary = `
+                <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, var(--verde-pastel) 0%, var(--verde-oscuro) 100%); color: white; border-radius: 15px; margin-bottom: 2rem;">
+                    <h2>🎉 ¡Pedido Confirmado!</h2>
+                    <p style="font-size: 1.2rem; margin: 1rem 0;">Gracias por elegir El Ranchito</p>
+                    <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+                        <h3>Número de Pedido: ${orderNumber}</h3>
+                        <p>Fecha: ${currentDate}</p>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h3 style="color: var(--rojo-oscuro); border-bottom: 2px solid var(--verde-pastel); padding-bottom: 10px;">📋 Resumen del Pedido</h3>
+                    
+                    <div style="margin: 1.5rem 0;">
+                        <h4 style="color: var(--verde-oscuro);">👤 Datos del Cliente:</h4>
+                        <p><strong>Nombre:</strong> ${name}</p>
+                        <p><strong>Teléfono:</strong> ${phone}</p>
+                        ${email ? `<p><strong>Email:</strong> ${email}</p>` : ''}
+                        <p><strong>Tipo de entrega:</strong> ${deliveryType === 'pickup' ? '🏪 Recojo en Local' : '🚗 Delivery'}</p>
+                        ${deliveryType === 'delivery' ? `<p><strong>Dirección:</strong> ${address}</p>` : ''}
+                        ${notes ? `<p><strong>Observaciones:</strong> ${notes}</p>` : ''}
+                    </div>
+
+                    <div style="margin: 1.5rem 0;">
+                        <h4 style="color: var(--verde-oscuro);">🛒 Productos:</h4>
+                        ${cart.map(item => `
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;">
+                                <div>
+                                    <strong>${item.name}</strong><br>
+                                    <small>Cantidad: ${item.quantity} | Precio unitario: S/ ${item.price.toFixed(2)}</small>
+                                </div>
+                                <div style="font-weight: bold; color: var(--rojo-oscuro);">
+                                    S/ ${(item.price * item.quantity).toFixed(2)}
+                                </div>
+                            </div>
+                        `).join('')}
+                        
+                        <div style="text-align: right; margin-top: 1rem; padding-top: 1rem; border-top: 3px solid var(--verde-pastel);">
+                            <h3 style="color: var(--rojo-oscuro);">Total: S/ ${cartTotal.toFixed(2)}</h3>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--gris-claro); padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
+                        <h4 style="color: var(--verde-oscuro);">📞 Información Importante:</h4>
+                        <p>• Nos contactaremos contigo en los próximos minutos para confirmar tu pedido</p>
+                        <p>• Tiempo estimado de preparación: 15-20 minutos</p>
+                        ${deliveryType === 'delivery' ? '<p>• Tiempo estimado de entrega: 30-45 minutos</p>' : '<p>• Puedes recoger tu pedido en: Calle Lazo de los Ríos, Yanahuara</p>'}
+                        <p>• Horarios de atención: 4:00 PM - 12:30 AM</p>
+                        <p>• Teléfono: +51 954 123 456</p>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <p style="color: var(--verde-oscuro); font-weight: bold;">¡Gracias por confiar en El Ranchito!</p>
+                        <p>🌮 Sabor auténtico mexicano con sazón peruana 🥪</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('orderConfirmation').innerHTML = orderSummary;
+            document.getElementById('orderModal').style.display = 'block';
+            closeCart();
+            
+            // Clear cart
+            cart = [];
+            updateCartDisplay();
+            
+            // Reset form
+            document.getElementById('customerName').value = '';
+            document.getElementById('customerPhone').value = '';
+            document.getElementById('customerEmail').value = '';
+            document.getElementById('deliveryType').value = '';
+            document.getElementById('customerAddress').value = '';
+            document.getElementById('orderNotes').value = '';
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const cartModal = document.getElementById('cartModal');
+            const orderModal = document.getElementById('orderModal');
+            
+            if (event.target === cartModal) {
+                closeCart();
+            }
+            
+            if (event.target === orderModal) {
+                closeOrderModal();
+            }
+        }
+
+        // Initialize cart display
+        updateCartDisplay();
+
+        // Add some animation to the hero section
+        window.addEventListener('load', function() {
+            const hero = document.querySelector('.hero');
+            hero.style.opacity = '0';
+            hero.style.transform = 'translateY(20px)';
+            hero.style.transition = 'all 0.8s ease';
+            
+            setTimeout(() => {
+                hero.style.opacity = '1';
+                hero.style.transform = 'translateY(0)';
+            }, 300);
+        });
+
+        // Add scroll animation to menu items
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .menu-item {
+                opacity: 0;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Observe menu items
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
